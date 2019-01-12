@@ -33,16 +33,13 @@ namespace Assets
         public void ConnectToNetwork()
         {
             PhotonNetwork.ConnectUsingSettings();
-
-
             Debug.Log("Connecting to Network...");
         }
 
 
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.JoinLobby(TypedLobby.Default);
-
+            PhotonNetwork.JoinRoom("One");
             Debug.Log("Connected to Master");
         }
 
