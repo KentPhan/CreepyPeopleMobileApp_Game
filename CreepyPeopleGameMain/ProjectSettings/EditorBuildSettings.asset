@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/KentTestScene.unity
+    path: Assets/Scenes/TestScenes/KentTestScene.unity
     guid: b0f880023cfc56645865c89b21a19e68
   m_configObjects: {}
