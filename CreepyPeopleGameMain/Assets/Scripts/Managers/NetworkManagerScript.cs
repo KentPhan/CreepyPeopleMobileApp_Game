@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets
 {
@@ -9,6 +10,13 @@ namespace Assets
         public string versionName = "0.1";
 
         public GameObject startScreen, connectedScreen, disconnectedScreen;
+        public Text connectionsCount;
+
+
+        private void OnGUI()
+        {
+            connectionsCount.text = PhotonNetwork.CountOfPlayers.ToString();
+        }
 
         // Start is called before the first frame update
         void Start()
