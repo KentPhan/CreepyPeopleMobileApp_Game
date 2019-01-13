@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Main.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class MainCanvasManager : MonoBehaviour
     {
-        public static GameManager Instance;
+        public static MainCanvasManager Instance;
+
+        public Text ConnectionText;
 
         private void Awake()
         {
@@ -27,6 +30,11 @@ namespace Assets.Scripts.Main.Managers
         void Update()
         {
 
+        }
+
+        public void SetConnectionStatusText(string i_text)
+        {
+            ConnectionText.text = i_text;
         }
     }
 }

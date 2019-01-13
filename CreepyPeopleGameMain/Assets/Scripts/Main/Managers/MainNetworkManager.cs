@@ -2,16 +2,16 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets
+namespace Assets.Scripts.Main.Managers
 {
-    public class MainNetworkManagerScript : MonoBehaviourPunCallbacks
+    public class MainNetworkManager : MonoBehaviourPunCallbacks
     {
         private byte maxPlayersPerRoom = 2;
 
         public string versionName = "0.1";
         public Text connectionsCount;
 
-        public static MainNetworkManagerScript Instance;
+        public static MainNetworkManager Instance;
 
         private void Awake()
         {
@@ -49,6 +49,7 @@ namespace Assets
         public override void OnConnectedToMaster()
         {
             PhotonNetwork.CreateRoom("One");
+            MainCanvasManager.Instance.SetConnectionStatusText("Connected");
             Debug.Log("Connected to Master");
         }
 
@@ -61,6 +62,7 @@ namespace Assets
 
         private void OnFailedToConnectToPhoton()
         {
+            MainCanvasManager.Instance.SetConnectionStatusText("Disconnected");
             Debug.Log("Disconnnected from Network...");
         }
     }
