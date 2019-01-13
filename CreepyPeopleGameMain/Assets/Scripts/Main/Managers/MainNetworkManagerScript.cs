@@ -1,33 +1,42 @@
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets
 {
-    public class NetworkManagerScript : MonoBehaviourPunCallbacks
+    public class MainNetworkManagerScript : MonoBehaviourPunCallbacks
     {
-        public string versionName = "0.1";
+        private byte maxPlayersPerRoom = 2;
 
-        public GameObject startScreen, connectedScreen, disconnectedScreen;
+        public string versionName = "0.1";
         public Text connectionsCount;
 
+        public static MainNetworkManagerScript Instance;
 
-        private void OnGUI()
+        private void Awake()
         {
-            connectionsCount.text = PhotonNetwork.CountOfPlayers.ToString();
+            if (Instance == null)
+                Instance = this;
+
+            else if (Instance != this)
+                Destroy(gameObject);
+
+            DontDestroyOnLoad(gameObject);
         }
 
         // Start is called before the first frame update
         void Start()
         {
-
+            ConnectToNetwork();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (PhotonNetwork.InRoom)
+            {
 
+            }
         }
 
         public void ConnectToNetwork()
@@ -39,7 +48,7 @@ namespace Assets
 
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.JoinRoom("One");
+            PhotonNetwork.CreateRoom("One");
             Debug.Log("Connected to Master");
         }
 
@@ -47,22 +56,11 @@ namespace Assets
 
         public override void OnJoinedLobby()
         {
-            startScreen.SetActive(false);
-            connectedScreen.SetActive(true);
-
             Debug.Log("Joined Lobby");
         }
 
         private void OnFailedToConnectToPhoton()
         {
-            if (startScreen.activeSelf)
-                startScreen.SetActive(false);
-
-            if (connectedScreen.activeSelf)
-                connectedScreen.SetActive(false);
-
-            disconnectedScreen.SetActive(true);
-
             Debug.Log("Disconnnected from Network...");
         }
     }
