@@ -1,18 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MobileGameManager : MonoBehaviour
+namespace Assets.Scripts.Mobile.Managers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MobileGameManager : MonoBehaviour
     {
-        
-    }
+        [SerializeField]
+        private GameObject PlayerPrefab;
+        [SerializeField]
+        private GameObject SpawnPosition;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public static MobileGameManager Instance;
+
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+
+            else if (Instance != this)
+                Destroy(gameObject);
+
+            DontDestroyOnLoad(gameObject);
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public GameObject GetPlayerPrefab()
+        {
+            return PlayerPrefab;
+        }
+
+        public Transform GetSpawnPosition()
+        {
+            return SpawnPosition.transform;
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace Assets.Scripts.Mobile.Managers
             }
 
             // Only for testing
-            MobileNetworkManager.Instance.SetConnectionStatusText(PhotonNetwork.NetworkClientState.ToString());
+            MobileCanvasManager.Instance.SetConnectionStatusText(PhotonNetwork.NetworkClientState.ToString());
         }
 
         public void ConnectToNetwork()
@@ -62,9 +62,6 @@ namespace Assets.Scripts.Mobile.Managers
 
         public override void OnJoinedRoom()
         {
-            GameObject l_playerPrefab = GameManager.Instance.GetPlayerPrefab();
-            Transform l_spawn = GameManager.Instance.GetSpawnPosition();
-            PhotonNetwork.Instantiate(l_playerPrefab.name, l_spawn.position, l_spawn.rotation, 0);
             Debug.Log("Joined Room");
         }
 
