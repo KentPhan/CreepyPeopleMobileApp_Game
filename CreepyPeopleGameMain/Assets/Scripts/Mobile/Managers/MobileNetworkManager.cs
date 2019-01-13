@@ -1,68 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
 
-public class MobileNetworkManager : MonoBehaviourPunCallbacks
+namespace Assets.Scripts.Mobile.Managers
 {
-    public string versionName = "0.1";
-
-    public GameObject startScreen, connectedScreen, disconnectedScreen;
-    public Text connectionsCount;
-
-
-    private void OnGUI()
+    public class MobileNetworkManager : MonoBehaviourPunCallbacks
     {
-        connectionsCount.text = PhotonNetwork.CountOfPlayers.ToString();
-    }
+        private byte maxPlayersPerRoom = 2;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+        public string versionName = "0.1";
 
-    }
+        public static MobileNetworkManager Instance;
 
-    // Update is called once per frame
-    void Update()
-    {
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
 
-    }
+            else if (Instance != this)
+                Destroy(gameObject);
 
-    public void ConnectToNetwork()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-        Debug.Log("Connecting to Network...");
-    }
+            DontDestroyOnLoad(gameObject);
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            ConnectToNetwork();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (PhotonNetwork.InRoom)
+            {
+
+            }
+
+            // Only for testing
+            MobileNetworkManager.Instance.SetConnectionStatusText(PhotonNetwork.NetworkClientState.ToString());
+        }
+
+        public void ConnectToNetwork()
+        {
+            PhotonNetwork.ConnectUsingSettings();
+            Debug.Log("Connecting to Network...");
+        }
 
 
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinRoom("One");
-        Debug.Log("Connected to Master");
-    }
+        public override void OnConnectedToMaster()
+        {
+            PhotonNetwork.JoinOrCreateRoom("One", null, null);
 
+            Debug.Log("Connected to Master");
+        }
 
+        public override void OnJoinedLobby()
+        {
+            Debug.Log("Joined Lobby");
+        }
 
-    public override void OnJoinedLobby()
-    {
-        startScreen.SetActive(false);
-        connectedScreen.SetActive(true);
+        public override void OnJoinedRoom()
+        {
+            GameObject l_playerPrefab = GameManager.Instance.GetPlayerPrefab();
+            Transform l_spawn = GameManager.Instance.GetSpawnPosition();
+            PhotonNetwork.Instantiate(l_playerPrefab.name, l_spawn.position, l_spawn.rotation, 0);
+            Debug.Log("Joined Room");
+        }
 
-
-        Debug.Log("Joined Lobby");
-    }
-
-    private void OnFailedToConnectToPhoton()
-    {
-        if (startScreen.activeSelf)
-            startScreen.SetActive(false);
-
-        if (connectedScreen.activeSelf)
-            connectedScreen.SetActive(false);
-
-        disconnectedScreen.SetActive(true);
-
-        Debug.Log("Disconnnected from Network...");
+        private void OnFailedToConnectToPhoton()
+        {
+            Debug.Log("Disconnnected from Network...");
+        }
     }
 }
