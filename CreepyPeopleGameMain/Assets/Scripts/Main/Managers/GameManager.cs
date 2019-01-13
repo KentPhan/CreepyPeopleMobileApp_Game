@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Main.Managers
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject PlayerPrefab;
+        [SerializeField]
+        private GameObject SpawnPosition;
+
         public static GameManager Instance;
 
         private void Awake()
@@ -27,6 +33,16 @@ namespace Assets.Scripts.Main.Managers
         void Update()
         {
 
+        }
+
+        public GameObject GetPlayerPrefab()
+        {
+            return PlayerPrefab;
+        }
+
+        public Transform GetSpawnPosition()
+        {
+            return SpawnPosition.transform;
         }
     }
 }

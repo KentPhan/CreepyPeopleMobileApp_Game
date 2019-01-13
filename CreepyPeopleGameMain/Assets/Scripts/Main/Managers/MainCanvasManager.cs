@@ -7,7 +7,8 @@ namespace Assets.Scripts.Main.Managers
     {
         public static MainCanvasManager Instance;
 
-        public Text ConnectionText;
+        [SerializeField] private Text ConnectionText;
+        [SerializeField] private Text TransformText;
 
         private void Awake()
         {
@@ -35,6 +36,11 @@ namespace Assets.Scripts.Main.Managers
         public void SetConnectionStatusText(string i_text)
         {
             ConnectionText.text = i_text;
+        }
+
+        public void SetTransformText(string i_text)
+        {
+            TransformText.text = i_text;
         }
     }
 }

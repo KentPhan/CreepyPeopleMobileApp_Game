@@ -9,7 +9,6 @@ namespace Assets.Scripts.Main.Managers
         private byte maxPlayersPerRoom = 2;
 
         public string versionName = "0.1";
-        public Text connectionsCount;
 
         public static MainNetworkManager Instance;
 
@@ -37,6 +36,9 @@ namespace Assets.Scripts.Main.Managers
             {
 
             }
+
+            // Only for testing
+            MainCanvasManager.Instance.SetConnectionStatusText(PhotonNetwork.NetworkClientState.ToString());
         }
 
         public void ConnectToNetwork()
@@ -48,21 +50,26 @@ namespace Assets.Scripts.Main.Managers
 
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.CreateRoom("One");
-            MainCanvasManager.Instance.SetConnectionStatusText("Connected");
+            PhotonNetwork.JoinOrCreateRoom("One", null, null);
+
             Debug.Log("Connected to Master");
         }
-
-
 
         public override void OnJoinedLobby()
         {
             Debug.Log("Joined Lobby");
         }
 
+        public override void OnJoinedRoom()
+        {
+            GameObject l_playerPrefab = GameManager.Instance.GetPlayerPrefab();
+            Transform l_spawn = GameManager.Instance.GetSpawnPosition();
+            PhotonNetwork.Instantiate(l_playerPrefab.name, l_spawn.position, l_spawn.rotation, 0);
+            Debug.Log("Joined Room");
+        }
+
         private void OnFailedToConnectToPhoton()
         {
-            MainCanvasManager.Instance.SetConnectionStatusText("Disconnected");
             Debug.Log("Disconnnected from Network...");
         }
     }
