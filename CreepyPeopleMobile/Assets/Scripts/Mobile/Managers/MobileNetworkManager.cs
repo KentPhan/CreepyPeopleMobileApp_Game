@@ -2,13 +2,13 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Mobile.Managers
 {
     public enum PhotonEventCodes
     {
-        MovedPosition = 0
+        MOVE_POSITION = 0,
+        FLASH_LIGHT = 1
     }
 
     public class MobileNetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
@@ -90,12 +90,16 @@ namespace Assets.Scripts.Mobile.Managers
 
         public void OnEvent(EventData photonEvent)
         {
-            if (photonEvent.Code == (byte)PhotonEventCodes.MovedPosition)
+            switch (photonEvent.Code)
             {
-                object[] l_data = (object[])photonEvent.CustomData;
-                Vector3 l_dataPosition = (Vector3)l_data[0];
-                MobileCanvasManager.Instance.SetTransformText(
-                    $"( {l_dataPosition.x} , {l_dataPosition.y} , {l_dataPosition.z} )");
+                case (byte)PhotonEventCodes.MOVE_POSITION:
+                    {
+                        object[] l_data = (object[])photonEvent.CustomData;
+                        Vector3 l_dataPosition = (Vector3)l_data[0];
+                        MobileCanvasManager.Instance.SetTransformText(
+                            $"( {l_dataPosition.x} , {l_dataPosition.y} , {l_dataPosition.z} )");
+                        break;
+                    }
             }
         }
 
