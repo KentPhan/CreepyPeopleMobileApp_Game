@@ -76,7 +76,7 @@ namespace Assets.Scripts.Mobile.Managers
 
         #endregion
 
-        #region -= Event Shit =-
+        #region -= Events =-
 
         public override void OnEnable()
         {
@@ -105,7 +105,7 @@ namespace Assets.Scripts.Mobile.Managers
 
         #endregion
 
-        #region -= Broadcast =-
+        #region -= RaiseEvents =-
 
         public void ToggleFlashLight(bool i_newState)
         {
