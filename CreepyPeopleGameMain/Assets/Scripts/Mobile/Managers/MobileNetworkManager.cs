@@ -69,5 +69,11 @@ namespace Assets.Scripts.Mobile.Managers
         {
             Debug.Log("Disconnnected from Network...");
         }
+
+        [PunRPC]
+        void UpdatePlayerPosition(int x, int y, int z)
+        {
+            MobileCanvasManager.Instance.SetTransformText(string.Format("({0},{1},{2})",x.ToString(), y.ToString(), x.ToString()));
+        }
     }
 }
