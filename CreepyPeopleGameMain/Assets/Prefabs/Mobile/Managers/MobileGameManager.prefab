@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8511973192038306917}
-  - component: {fileID: 3568804368237414546}
+  - component: {fileID: 951332535394318397}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: MobileGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3568804368237414546
+--- !u!114 &951332535394318397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6237142412616906631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f3b18a27faad84e9c2fb679b237d47, type: 3}
+  m_Script: {fileID: 11500000, guid: 712e4cf179abf504db0e2bbd62724e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 673094999072308791, guid: ef369a2ae392e154bae14211ca1c02e4,
-    type: 3}
+  SpawnPosition: {fileID: 0}

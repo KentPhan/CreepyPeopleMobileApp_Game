@@ -5,8 +5,6 @@ namespace Assets.Scripts.Mobile.Managers
     public class MobileGameManager : MonoBehaviour
     {
         [SerializeField]
-        private GameObject PlayerPrefab;
-        [SerializeField]
         private GameObject SpawnPosition;
 
         public static MobileGameManager Instance;
@@ -36,7 +34,7 @@ namespace Assets.Scripts.Mobile.Managers
 
         public GameObject GetPlayerPrefab()
         {
-            return PlayerPrefab;
+            return null;
         }
 
         public Transform GetSpawnPosition()
