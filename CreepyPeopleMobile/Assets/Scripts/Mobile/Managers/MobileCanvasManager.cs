@@ -9,6 +9,7 @@ namespace Assets.Scripts.Mobile.Managers
 
         [SerializeField] private Text ConnectionText;
         [SerializeField] private Text TransformText;
+        [SerializeField] private Toggle FlashLightToggle;
 
         private void Awake()
         {
@@ -24,7 +25,10 @@ namespace Assets.Scripts.Mobile.Managers
         // Start is called before the first frame update
         void Start()
         {
-
+            FlashLightToggle.onValueChanged.AddListener(delegate
+            {
+                OnFlashLightToggle(FlashLightToggle);
+            });
         }
 
         // Update is called once per frame
@@ -41,6 +45,11 @@ namespace Assets.Scripts.Mobile.Managers
         public void SetTransformText(string i_text)
         {
             TransformText.text = i_text;
+        }
+
+        public void OnFlashLightToggle(Toggle i_change)
+        {
+            MobileNetworkManager.Instance.ToggleFlashLight(i_change.isOn);
         }
     }
 }

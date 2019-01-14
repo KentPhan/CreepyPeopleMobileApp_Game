@@ -104,5 +104,17 @@ namespace Assets.Scripts.Mobile.Managers
         }
 
         #endregion
+
+        #region -= Broadcast =-
+
+        public void ToggleFlashLight(bool i_newState)
+        {
+            object[] l_content = new object[] { i_newState };
+            RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
+            SendOptions l_sendOptions = new SendOptions() { Reliability = true };
+            PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.FLASH_LIGHT, l_content, l_eventOptions, l_sendOptions);
+        }
+
+        #endregion
     }
 }

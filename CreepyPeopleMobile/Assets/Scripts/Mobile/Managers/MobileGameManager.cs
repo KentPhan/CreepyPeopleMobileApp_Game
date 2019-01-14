@@ -6,6 +6,9 @@ namespace Assets.Scripts.Mobile.Managers
     {
         public static MobileGameManager Instance;
 
+
+        private bool FlashLightOn = false;
+
         private void Awake()
         {
             if (Instance == null)
@@ -32,6 +35,18 @@ namespace Assets.Scripts.Mobile.Managers
         public GameObject GetPlayerPrefab()
         {
             return null;
+        }
+
+        public void ToggleFlashLight()
+        {
+            if (FlashLightOn)
+            {
+                FlashLightOn = false;
+            }
+            else
+            {
+                FlashLightOn = true;
+            }
         }
     }
 }

@@ -132,7 +132,7 @@
         </member>
         <member name="T:ExitGames.Client.Photon.StatusCode">
             <summary>
-            Enumeration of situations that change the peers internal status.
+            Enumeration of situations that i_change the peers internal status.
             Used in calls to OnStatusChanged to inform your application of various situations that might happen.
             </summary>
             <remarks>
@@ -257,7 +257,7 @@
              </summary>
              <remarks>
              Not all of the many StatusCode values will apply to your game. Example: If you don't use encryption,
-             the respective status changes are never made.
+             the respective status i_changes are never made.
             
              The values are all part of the StatusCode enumeration and described value-by-value.
              </remarks>
@@ -317,7 +317,7 @@
             </summary>
             <remarks>
             While this is not the same as the StatusCode of IPhotonPeerListener.OnStatusChanged(), it directly relates to it.
-            In most cases, it makes more sense to build a game's state on top of the OnStatusChanged() as you get changes.
+            In most cases, it makes more sense to build a game's state on top of the OnStatusChanged() as you get i_changes.
             </remarks>
         </member>
         <member name="F:ExitGames.Client.Photon.PeerStateValue.Disconnected">
@@ -401,8 +401,8 @@
         <member name="P:ExitGames.Client.Photon.PhotonPeer.ClientSdkIdShifted">
             <summary>For the Init-request, we shift the ClientId by one and the last bit signals a "debug" (0) or "release" build (1).</summary>
         </member>
-        <member name="F:ExitGames.Client.Photon.PhotonPeer.AsyncKeyExchange">
-            <summary>Defines if Key Exchange for Encryption is done asynchronously in another thread.</summary>
+        <member name="F:ExitGames.Client.Photon.PhotonPeer.AsyncKeyExi_change">
+            <summary>Defines if Key Exi_change for Encryption is done asynchronously in another thread.</summary>
         </member>
         <member name="P:ExitGames.Client.Photon.PhotonPeer.ClientVersion">
             <summary>Version of this library as string.</summary>
@@ -742,7 +742,7 @@
             The server address which was used in PhotonPeer.Connect() or null (before Connect() was called).
             </summary>
             <remarks>
-            The ServerAddress can only be changed for HTTP connections (to replace one that goes through a Loadbalancer with a direct URL).
+            The ServerAddress can only be i_changed for HTTP connections (to replace one that goes through a Loadbalancer with a direct URL).
             </remarks>
         </member>
         <member name="P:ExitGames.Client.Photon.PhotonPeer.UsedProtocol">
@@ -750,7 +750,7 @@
         </member>
         <member name="P:ExitGames.Client.Photon.PhotonPeer.TransportProtocol">
             <summary>This is the transport protocol to be used for next connect (see remarks).</summary>
-            <remarks>The TransportProtocol can be changed anytime but it will not change the
+            <remarks>The TransportProtocol can be i_changed anytime but it will not i_change the
             currently active connection. Instead, TransportProtocol will be applied on next Connect.
             </remarks>
         </member>
@@ -793,7 +793,7 @@
         </member>
         <member name="P:ExitGames.Client.Photon.PhotonPeer.IsEncryptionAvailable">
             <summary>
-            This property is set internally, when OpExchangeKeysForEncryption successfully finished.
+            This property is set internally, when OpExi_changeKeysForEncryption successfully finished.
             While it's true, encryption can be used for operations.
             </summary>
         </member>
@@ -965,7 +965,7 @@
         </member>
         <member name="M:ExitGames.Client.Photon.PhotonPeer.EstablishEncryption">
              <summary>
-             This method creates a public key for this client and exchanges it with the server.
+             This method creates a public key for this client and exi_changes it with the server.
              </summary>
              <remarks>
              Encryption is not instantly available but calls OnStatusChanged when it finishes.
@@ -1038,7 +1038,7 @@
         </member>
         <member name="M:ExitGames.Client.Photon.PhotonPeer.DispatchIncomingCommands">
              <summary>
-             Dispatching received messages (commands), causes callbacks for events, responses and state changes within a IPhotonPeerListener.
+             Dispatching received messages (commands), causes callbacks for events, responses and state i_changes within a IPhotonPeerListener.
              </summary>
              <remarks>
              DispatchIncomingCommands only executes a single received
@@ -1256,9 +1256,9 @@
             </summary>
             <returns>If a Dispatch happened or not, which shows if more Dispatches might be needed.</returns>
         </member>
-        <member name="M:ExitGames.Client.Photon.PeerBase.ExchangeKeysForEncryption(System.Object)">
+        <member name="M:ExitGames.Client.Photon.PeerBase.Exi_changeKeysForEncryption(System.Object)">
             <summary>
-            Internally uses an operation to exchange encryption keys with the server.
+            Internally uses an operation to exi_change encryption keys with the server.
             </summary>
             <returns>If the op could be sent.</returns>
         </member>
