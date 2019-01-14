@@ -1,10 +1,17 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Mobile.Managers
 {
-    public class MobileNetworkManager : MonoBehaviourPunCallbacks
+    public enum PhotonEventCodes
+    {
+        MovedPosition = 0
+    }
+
+    public class MobileNetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         private byte maxPlayersPerRoom = 2;
 
@@ -32,14 +39,11 @@ namespace Assets.Scripts.Mobile.Managers
         // Update is called once per frame
         void Update()
         {
-            if (PhotonNetwork.InRoom)
-            {
-
-            }
-
             // Only for testing
             MobileCanvasManager.Instance.SetConnectionStatusText(PhotonNetwork.NetworkClientState.ToString());
         }
+
+        #region -= ConnectionToRoom =-
 
         public void ConnectToNetwork()
         {
@@ -67,13 +71,34 @@ namespace Assets.Scripts.Mobile.Managers
 
         private void OnFailedToConnectToPhoton()
         {
-            Debug.Log("Disconnnected from Network...");
+            Debug.Log("Disconnected from Network...");
         }
 
-        [PunRPC]
-        void UpdatePlayerPosition(int x, int y, int z)
+        #endregion
+
+        #region -= Event Shit =-
+
+        public override void OnEnable()
         {
-            MobileCanvasManager.Instance.SetTransformText(string.Format("({0},{1},{2})",x.ToString(), y.ToString(), x.ToString()));
+            PhotonNetwork.AddCallbackTarget(this);
         }
+
+        public override void OnDisable()
+        {
+            PhotonNetwork.RemoveCallbackTarget(this);
+        }
+
+        public void OnEvent(EventData photonEvent)
+        {
+            if (photonEvent.Code == (byte)PhotonEventCodes.MovedPosition)
+            {
+                object[] l_data = (object[])photonEvent.CustomData;
+                Vector3 l_dataPosition = (Vector3)l_data[0];
+                MobileCanvasManager.Instance.SetTransformText(
+                    $"( {l_dataPosition.x} , {l_dataPosition.y} , {l_dataPosition.z} )");
+            }
+        }
+
+        #endregion
     }
 }
