@@ -7,10 +7,12 @@ namespace Assets.Scripts.Mobile.Managers
 {
     public enum PhotonEventCodes
     {
-        MOVE_POSITION = 0,
+        PLAYER_TRANSFORM = 0,
         FLASH_LIGHT_TOGGLE = 1,
         FLASH_LIGHT_POWER = 2,
-        INVENTORY_STATUS = 3
+        INVENTORY_STATUS = 3,
+        GAME_STATE = 4,
+        ENEMY_POSITIONS = 5
     }
 
     public class MobileNetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
@@ -94,9 +96,9 @@ namespace Assets.Scripts.Mobile.Managers
         {
             switch (photonEvent.Code)
             {
-                case (byte)PhotonEventCodes.MOVE_POSITION:
+                case (byte)PhotonEventCodes.PLAYER_TRANSFORM:
                     {
-                        OnReceivePosition(photonEvent);
+                        OnReceiveTransform(photonEvent);
                         break;
                     }
                 case (byte)PhotonEventCodes.FLASH_LIGHT_POWER:
@@ -112,12 +114,15 @@ namespace Assets.Scripts.Mobile.Managers
             }
         }
 
-        public void OnReceivePosition(EventData i_photonEvent)
+        public void OnReceiveTransform(EventData i_photonEvent)
         {
             object[] l_data = (object[])i_photonEvent.CustomData;
             Vector3 l_dataPosition = (Vector3)l_data[0];
+            Quaternion l_dataRotation = (Quaternion)l_data[1];
             MobileCanvasManager.Instance.SetTransformText(
                 $"( {l_dataPosition.x} , {l_dataPosition.y} , {l_dataPosition.z} )");
+
+            MobileGameManager.Instance.UpdatePlayerTransform(l_dataPosition, l_dataRotation);
         }
 
         public void OnReceivePhonePower(EventData i_photonEvent)

@@ -7,7 +7,8 @@ namespace Assets.Scripts.Mobile.Managers
     public enum PhoneStates
     {
         HOME,
-        MAP
+        MAP,
+        NO_POWER
     }
 
     public class MobileCanvasManager : MonoBehaviour
@@ -17,6 +18,7 @@ namespace Assets.Scripts.Mobile.Managers
         // Screens
         [SerializeField] private RectTransform HomeScreen;
         [SerializeField] private RectTransform MappAppScreen;
+        [SerializeField] private RectTransform NoPowerScreen;
 
         // Debug Texts
         [SerializeField] private TextMeshProUGUI ConnectionText;
@@ -46,6 +48,7 @@ namespace Assets.Scripts.Mobile.Managers
                 Destroy(gameObject);
 
             DontDestroyOnLoad(gameObject);
+
         }
 
 
@@ -65,7 +68,8 @@ namespace Assets.Scripts.Mobile.Managers
             });
             HomeButton.onClick.AddListener(delegate
             {
-                SwitchToHome(HomeButton);
+                if (m_CurrentPhoneState != PhoneStates.NO_POWER)
+                    SwitchToHome(HomeButton);
             });
 
             // Get Power Bar Max Width based upon how it is set
@@ -100,13 +104,26 @@ namespace Assets.Scripts.Mobile.Managers
         {
             Rect l_currentRect = PowerInnerBar.rect;
             float l_newWidth = i_Ratio * m_PowerBarMaxWidth;
-            if (l_newWidth <= 0)
+
+            if (m_CurrentPhoneState != PhoneStates.NO_POWER)
             {
-                // TODO Event on running out of power
-                // If Power Runs out. Run Event here
-                l_newWidth = 0;
+                if (l_newWidth <= 0)
+                {
+                    SwitchToNoPower();
+                    l_newWidth = 0;
+                }
+                PowerInnerBar.sizeDelta = new Vector2(l_newWidth, l_currentRect.height);
             }
-            PowerInnerBar.sizeDelta = new Vector2(l_newWidth, l_currentRect.height);
+            else
+            {
+                if (l_newWidth > 0)
+                {
+                    SwitchToHome(HomeButton);
+                }
+            }
+
+
+
         }
 
         /// <summary>
@@ -136,6 +153,7 @@ namespace Assets.Scripts.Mobile.Managers
             if (m_CurrentPhoneState != PhoneStates.MAP)
             {
                 m_CurrentPhoneState = PhoneStates.MAP;
+                NoPowerScreen.gameObject.SetActive(false);
                 MappAppScreen.gameObject.SetActive(true);
                 HomeScreen.gameObject.SetActive(false);
             }
@@ -144,8 +162,17 @@ namespace Assets.Scripts.Mobile.Managers
         private void SwitchToHome(Button i_Button)
         {
             m_CurrentPhoneState = PhoneStates.HOME;
+            NoPowerScreen.gameObject.SetActive(false);
             MappAppScreen.gameObject.SetActive(false);
             HomeScreen.gameObject.SetActive(true);
+        }
+
+        private void SwitchToNoPower()
+        {
+            m_CurrentPhoneState = PhoneStates.NO_POWER;
+            NoPowerScreen.gameObject.SetActive(true);
+            MappAppScreen.gameObject.SetActive(false);
+            HomeScreen.gameObject.SetActive(false);
         }
 
         #endregion

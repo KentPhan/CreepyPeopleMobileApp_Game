@@ -9,6 +9,8 @@ namespace Assets.Scripts.Mobile.Managers
 
         private bool FlashLightOn = false;
 
+        private GameObject PlayerRepresentationPrefab;
+
         private void Awake()
         {
             if (Instance == null)
@@ -34,7 +36,13 @@ namespace Assets.Scripts.Mobile.Managers
 
         public GameObject GetPlayerPrefab()
         {
-            return null;
+            return PlayerRepresentationPrefab;
+        }
+
+        public void UpdatePlayerTransform(Vector3 i_Position, Quaternion i_Rotation)
+        {
+            PlayerRepresentationPrefab.transform.position = i_Position;
+            PlayerRepresentationPrefab.transform.rotation = i_Rotation;
         }
 
         public void ToggleFlashLight()
