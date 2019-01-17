@@ -31,6 +31,9 @@ namespace Assets.Scripts.Mobile.Managers
         [SerializeField] private RectTransform PowerInnerBar;
         private float m_PowerBarMaxWidth;
 
+        // Inventory
+        [SerializeField] private RectTransform InventorySection;
+
         // Members
         private PhoneStates m_CurrentPhoneState;
 
@@ -68,6 +71,9 @@ namespace Assets.Scripts.Mobile.Managers
             // Get Power Bar Max Width based upon how it is set
             m_PowerBarMaxWidth = PowerInnerBar.rect.width;
 
+            // Set initial inventory
+            InventorySection.GetChild(0).gameObject.SetActive(false);
+
             // Set initial state
             SwitchToHome(HomeButton);
         }
@@ -101,6 +107,18 @@ namespace Assets.Scripts.Mobile.Managers
                 l_newWidth = 0;
             }
             PowerInnerBar.sizeDelta = new Vector2(l_newWidth, l_currentRect.height);
+        }
+
+        /// <summary>
+        /// Updates the inventory. TODO Very basic right now. Only one item
+        /// </summary>
+        /// <param name="i_HasKey">if set to <c>true</c> [i has key].</param>
+        public void UpdateInventory(bool i_HasKey)
+        {
+            if (i_HasKey)
+                InventorySection.GetChild(0).gameObject.SetActive(true);
+            else
+                InventorySection.GetChild(0).gameObject.SetActive(false);
         }
 
         private void OnFlashLightToggle(Toggle i_Toggle)

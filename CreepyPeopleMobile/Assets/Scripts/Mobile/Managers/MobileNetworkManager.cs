@@ -122,6 +122,14 @@ namespace Assets.Scripts.Mobile.Managers
             MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
         }
 
+        public void OnReceiveInventoryStatus(EventData i_photonEvent)
+        {
+            // TODO Incorporate more items
+            object[] l_data = (object[])i_photonEvent.CustomData;
+            bool l_dataHasKey = (bool)l_data[0];
+            MobileCanvasManager.Instance.UpdateInventory(l_dataHasKey);
+        }
+
         #endregion
 
         #region -= RaiseEvents =-
