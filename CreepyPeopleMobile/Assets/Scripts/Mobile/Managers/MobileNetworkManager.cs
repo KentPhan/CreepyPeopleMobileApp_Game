@@ -10,6 +10,7 @@ namespace Assets.Scripts.Mobile.Managers
         MOVE_POSITION = 0,
         FLASH_LIGHT_TOGGLE = 1,
         FLASH_LIGHT_POWER = 2,
+        INVENTORY_STATUS = 3
     }
 
     public class MobileNetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
