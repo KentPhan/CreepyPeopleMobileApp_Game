@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,8 @@ namespace Assets.Scripts.Mobile.Managers
     {
         public static MobileCanvasManager Instance;
 
-        [SerializeField] private Text ConnectionText;
-        [SerializeField] private Text TransformText;
+        [SerializeField] private TextMeshProUGUI ConnectionText;
+        [SerializeField] private TextMeshProUGUI TransformText;
         [SerializeField] private Toggle FlashLightToggle;
 
         private void Awake()
@@ -50,6 +51,11 @@ namespace Assets.Scripts.Mobile.Managers
         public void OnFlashLightToggle(Toggle i_change)
         {
             MobileNetworkManager.Instance.ToggleFlashLight(i_change.isOn);
+
+            ColorBlock l_ColorBlock = i_change.colors;
+            l_ColorBlock.normalColor = i_change.isOn ? Color.grey : Color.white;
+            l_ColorBlock.highlightedColor = i_change.isOn ? Color.grey : Color.white;
+            i_change.colors = l_ColorBlock;
         }
     }
 }

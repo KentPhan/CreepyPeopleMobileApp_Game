@@ -8,7 +8,8 @@ namespace Assets.Scripts.Mobile.Managers
     public enum PhotonEventCodes
     {
         MOVE_POSITION = 0,
-        FLASH_LIGHT = 1
+        FLASH_LIGHT_TOGGLE = 1,
+        FLASH_LIGHT_POWER = 2,
     }
 
     public class MobileNetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
@@ -94,13 +95,29 @@ namespace Assets.Scripts.Mobile.Managers
             {
                 case (byte)PhotonEventCodes.MOVE_POSITION:
                     {
-                        object[] l_data = (object[])photonEvent.CustomData;
-                        Vector3 l_dataPosition = (Vector3)l_data[0];
-                        MobileCanvasManager.Instance.SetTransformText(
-                            $"( {l_dataPosition.x} , {l_dataPosition.y} , {l_dataPosition.z} )");
+                        OnReceivePosition(photonEvent);
+                        break;
+                    }
+                case (byte)PhotonEventCodes.FLASH_LIGHT_POWER:
+                    {
+                        OnReceivePhonePower(photonEvent);
                         break;
                     }
             }
+        }
+
+        public void OnReceivePosition(EventData i_photonEvent)
+        {
+            object[] l_data = (object[])i_photonEvent.CustomData;
+            Vector3 l_dataPosition = (Vector3)l_data[0];
+            MobileCanvasManager.Instance.SetTransformText(
+                $"( {l_dataPosition.x} , {l_dataPosition.y} , {l_dataPosition.z} )");
+        }
+
+        public void OnReceivePhonePower(EventData i_photonEvent)
+        {
+            object[] l_data = (object[])i_photonEvent.CustomData;
+            float l_dataRatio = (float)l_data[0];
         }
 
         #endregion
@@ -112,7 +129,7 @@ namespace Assets.Scripts.Mobile.Managers
             object[] l_content = new object[] { i_newState };
             RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
             SendOptions l_sendOptions = new SendOptions() { Reliability = true };
-            PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.FLASH_LIGHT, l_content, l_eventOptions, l_sendOptions);
+            PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.FLASH_LIGHT_TOGGLE, l_content, l_eventOptions, l_sendOptions);
         }
 
         #endregion
