@@ -104,6 +104,11 @@ namespace Assets.Scripts.Mobile.Managers
                         OnReceivePhonePower(photonEvent);
                         break;
                     }
+                case (byte)PhotonEventCodes.INVENTORY_STATUS:
+                    {
+                        OnReceiveInventoryStatus(photonEvent);
+                        break;
+                    }
             }
         }
 
