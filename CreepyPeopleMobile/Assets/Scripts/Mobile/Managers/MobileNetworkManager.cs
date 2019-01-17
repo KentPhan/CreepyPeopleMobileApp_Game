@@ -119,6 +119,7 @@ namespace Assets.Scripts.Mobile.Managers
         {
             object[] l_data = (object[])i_photonEvent.CustomData;
             float l_dataRatio = (float)l_data[0];
+            MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
         }
 
         #endregion

@@ -27,6 +27,10 @@ namespace Assets.Scripts.Mobile.Managers
         [SerializeField] private Button MapButton;
         [SerializeField] private Button HomeButton;
 
+        // Power Bar
+        [SerializeField] private RectTransform PowerInnerBar;
+        private float m_PowerBarMaxWidth;
+
         // Members
         private PhoneStates m_CurrentPhoneState;
 
@@ -61,6 +65,9 @@ namespace Assets.Scripts.Mobile.Managers
                 SwitchToHome(HomeButton);
             });
 
+            // Get Power Bar Max Width based upon how it is set
+            m_PowerBarMaxWidth = PowerInnerBar.rect.width;
+
             // Set initial state
             SwitchToHome(HomeButton);
         }
@@ -82,6 +89,19 @@ namespace Assets.Scripts.Mobile.Managers
         }
 
         #region -= Events =-
+
+        public void UpdatePowerBar(float i_Ratio)
+        {
+            Rect l_currentRect = PowerInnerBar.rect;
+            float l_newWidth = i_Ratio * m_PowerBarMaxWidth;
+            if (l_newWidth <= 0)
+            {
+                // TODO Event on running out of power
+                // If Power Runs out. Run Event here
+                l_newWidth = 0;
+            }
+            PowerInnerBar.sizeDelta = new Vector2(l_newWidth, l_currentRect.height);
+        }
 
         private void OnFlashLightToggle(Toggle i_Toggle)
         {
