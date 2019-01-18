@@ -74,11 +74,13 @@ namespace Assets.Scripts.Mobile.Managers
             switch (i_State)
             {
                 case GameStates.START:
-                    MobileCanvasManager.Instance.Chang
+                    MobileCanvasManager.Instance.SwitchToNoPower();
                     break;
                 case GameStates.PLAY:
+                    MobileCanvasManager.Instance.SwitchToHome();
                     break;
                 case GameStates.GAMEOVER:
+                    MobileCanvasManager.Instance.SwitchToNoPower();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(i_State), i_State, null);

@@ -64,12 +64,12 @@ namespace Assets.Scripts.Mobile.Managers
             });
             MapButton.onClick.AddListener(delegate
             {
-                SwitchToMap(MapButton);
+                SwitchToMap();
             });
             HomeButton.onClick.AddListener(delegate
             {
                 if (m_CurrentPhoneState != PhoneStates.NO_POWER)
-                    SwitchToHome(HomeButton);
+                    SwitchToHome();
             });
 
             // Get Power Bar Max Width based upon how it is set
@@ -79,7 +79,7 @@ namespace Assets.Scripts.Mobile.Managers
             InventorySection.GetChild(0).gameObject.SetActive(false);
 
             // Set initial state
-            SwitchToHome(HomeButton);
+            SwitchToNoPower();
         }
 
         // Update is called once per frame
@@ -118,7 +118,7 @@ namespace Assets.Scripts.Mobile.Managers
             {
                 if (l_newWidth > 0)
                 {
-                    SwitchToHome(HomeButton);
+                    SwitchToHome();
                 }
             }
 
@@ -138,7 +138,7 @@ namespace Assets.Scripts.Mobile.Managers
                 InventorySection.GetChild(0).gameObject.SetActive(false);
         }
 
-        private void OnFlashLightToggle(Toggle i_Toggle)
+        public void OnFlashLightToggle(Toggle i_Toggle)
         {
             MobileNetworkManager.Instance.ToggleFlashLight(i_Toggle.isOn);
 
@@ -148,7 +148,7 @@ namespace Assets.Scripts.Mobile.Managers
             i_Toggle.colors = l_ColorBlock;
         }
 
-        private void SwitchToMap(Button i_Button)
+        public void SwitchToMap()
         {
             if (m_CurrentPhoneState != PhoneStates.MAP)
             {
@@ -159,7 +159,7 @@ namespace Assets.Scripts.Mobile.Managers
             }
         }
 
-        private void SwitchToHome(Button i_Button)
+        public void SwitchToHome()
         {
             m_CurrentPhoneState = PhoneStates.HOME;
             NoPowerScreen.gameObject.SetActive(false);
@@ -167,7 +167,7 @@ namespace Assets.Scripts.Mobile.Managers
             HomeScreen.gameObject.SetActive(true);
         }
 
-        private void SwitchToNoPower()
+        public void SwitchToNoPower()
         {
             m_CurrentPhoneState = PhoneStates.NO_POWER;
             NoPowerScreen.gameObject.SetActive(true);
