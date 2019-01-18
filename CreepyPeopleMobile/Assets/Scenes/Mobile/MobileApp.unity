@@ -112,6 +112,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &8739128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3103198466756783, guid: e826020ece5473e42b210db68ab161d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9062718974953184662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &410376193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,9 +283,10 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 410376195, guid: cdc84df3967d21d4ba46f201e462596c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 6091830426350596880, guid: cdc84df3967d21d4ba46f201e462596c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc84df3967d21d4ba46f201e462596c, type: 3}
@@ -666,6 +673,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 951332535394318397, guid: cf0fa3a28bac218498db84aee67d7b97,
+        type: 3}
+      propertyPath: PlayerRepresentationPrefab
+      value: 
+      objectReference: {fileID: 8739128}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0fa3a28bac218498db84aee67d7b97, type: 3}
 --- !u!1 &1969517342

@@ -1,7 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Mobile.Managers
 {
+    public enum GameStates
+    {
+        START = 0,
+        PLAY = 1,
+        GAMEOVER = 2
+    }
+
     public class MobileGameManager : MonoBehaviour
     {
         public static MobileGameManager Instance;
@@ -9,7 +17,10 @@ namespace Assets.Scripts.Mobile.Managers
 
         private bool FlashLightOn = false;
 
+        [SerializeField]
         private GameObject PlayerRepresentationPrefab;
+
+        private GameStates m_CurrentGameState;
 
         private void Awake()
         {
@@ -54,6 +65,23 @@ namespace Assets.Scripts.Mobile.Managers
             else
             {
                 FlashLightOn = true;
+            }
+        }
+
+        public void UpdateGameState(GameStates i_State)
+        {
+            m_CurrentGameState = i_State;
+            switch (i_State)
+            {
+                case GameStates.START:
+                    MobileCanvasManager.Instance.Chang
+                    break;
+                case GameStates.PLAY:
+                    break;
+                case GameStates.GAMEOVER:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(i_State), i_State, null);
             }
         }
     }

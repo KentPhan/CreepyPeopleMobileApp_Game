@@ -111,6 +111,11 @@ namespace Assets.Scripts.Mobile.Managers
                         OnReceiveInventoryStatus(photonEvent);
                         break;
                     }
+                case (byte)PhotonEventCodes.GAME_STATE:
+                    {
+                        OnReceiveGameState(photonEvent);
+                        break;
+                    }
             }
         }
 
@@ -138,6 +143,13 @@ namespace Assets.Scripts.Mobile.Managers
             object[] l_data = (object[])i_photonEvent.CustomData;
             bool l_dataHasKey = (bool)l_data[0];
             MobileCanvasManager.Instance.UpdateInventory(l_dataHasKey);
+        }
+
+        public void OnReceiveGameState(EventData i_photonEvent)
+        {
+            object[] l_data = (object[])i_photonEvent.CustomData;
+            GameStates l_dataState = (GameStates)l_data[0];
+            MobileGameManager.Instance.UpdateGameState(l_dataState);
         }
 
         #endregion
