@@ -73,6 +73,18 @@ namespace Assets.Scripts.Mobile.Managers
             Debug.Log("Joined Room");
         }
 
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            // Put logic for disconnecting or disconnecting
+            base.OnPlayerEnteredRoom(newPlayer);
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            // Put logic for disconnecting or disconnecting
+            base.OnPlayerLeftRoom(otherPlayer);
+        }
+
         private void OnFailedToConnectToPhoton()
         {
             Debug.Log("Disconnected from Network...");
