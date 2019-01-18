@@ -19,8 +19,11 @@ namespace Assets.Scripts.Mobile.Managers
 
         [SerializeField]
         private GameObject PlayerRepresentationPrefab;
+        [SerializeField]
+        private GameObject SpawnPosition;
 
         private GameStates m_CurrentGameState;
+        private GameObject m_CurrentPlayer;
 
         private void Awake()
         {
@@ -36,7 +39,7 @@ namespace Assets.Scripts.Mobile.Managers
         // Start is called before the first frame update
         void Start()
         {
-
+            m_CurrentPlayer = Instantiate(PlayerRepresentationPrefab, SpawnPosition.transform.position, SpawnPosition.transform.rotation);
         }
 
         // Update is called once per frame
@@ -52,8 +55,8 @@ namespace Assets.Scripts.Mobile.Managers
 
         public void UpdatePlayerTransform(Vector3 i_Position, Quaternion i_Rotation)
         {
-            PlayerRepresentationPrefab.transform.position = i_Position;
-            PlayerRepresentationPrefab.transform.rotation = i_Rotation;
+            m_CurrentPlayer.transform.position = i_Position;
+            m_CurrentPlayer.transform.rotation = i_Rotation;
         }
 
         public void ToggleFlashLight()
@@ -80,6 +83,8 @@ namespace Assets.Scripts.Mobile.Managers
                     MobileCanvasManager.Instance.SwitchToHome();
                     break;
                 case GameStates.GAMEOVER:
+                    m_CurrentPlayer.transform.position = SpawnPosition.transform.position;
+                    m_CurrentPlayer.transform.rotation = SpawnPosition.transform.rotation;
                     MobileCanvasManager.Instance.SwitchToNoPower();
                     break;
                 default:
