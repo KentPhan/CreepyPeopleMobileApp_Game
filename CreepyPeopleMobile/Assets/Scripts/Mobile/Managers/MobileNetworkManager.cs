@@ -23,6 +23,10 @@ namespace Assets.Scripts.Mobile.Managers
 
         public static MobileNetworkManager Instance;
 
+        private string m_RoomName;
+
+        private bool m_EstablishedRoom;
+
         private void Awake()
         {
             if (Instance == null)
@@ -32,12 +36,15 @@ namespace Assets.Scripts.Mobile.Managers
                 Destroy(gameObject);
 
             DontDestroyOnLoad(gameObject);
+
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            ConnectToNetwork();
+            m_RoomName = "One";
+            m_EstablishedRoom = false;
+            //ConnectToNetwork();
         }
 
         // Update is called once per frame
@@ -49,18 +56,51 @@ namespace Assets.Scripts.Mobile.Managers
 
         #region -= ConnectionToRoom =-
 
-        public void ConnectToNetwork()
+        public bool ConnectToNetwork()
         {
-            PhotonNetwork.ConnectUsingSettings();
             Debug.Log("Connecting to Network...");
+            return PhotonNetwork.ConnectUsingSettings();
         }
 
 
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.JoinOrCreateRoom("One", null, null);
+            //PhotonNetwork.JoinOrCreateRoom("One", null, null);
+            Debug.Log($"Connected to Master Rooms:{PhotonNetwork.CountOfRooms.ToString()}");
 
-            Debug.Log("Connected to Master");
+            PhotonNetwork.JoinOrCreateRoom(m_RoomName, null, null);
+        }
+        public override void OnCreatedRoom()
+        {
+            Debug.Log("Created Room");
+            base.OnCreatedRoom();
+        }
+
+        public override void OnCreateRoomFailed(short returnCode, string message)
+        {
+            Debug.LogWarning($"Failed to Create Room {message}");
+            base.OnCreateRoomFailed(returnCode, message);
+        }
+
+        public bool JoinRoom(string i_RoomName)
+        {
+            m_RoomName = i_RoomName;
+            if (PhotonNetwork.IsConnectedAndReady)
+            {
+                return PhotonNetwork.JoinOrCreateRoom(m_RoomName, null, null);
+            }
+            else
+            {
+                if (ConnectToNetwork())
+                {
+                    m_EstablishedRoom = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public override void OnJoinedLobby()
@@ -71,6 +111,7 @@ namespace Assets.Scripts.Mobile.Managers
         public override void OnJoinedRoom()
         {
             Debug.Log("Joined Room");
+            MobileGameManager.Instance.UpdateGameState(GameStates.START);
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -88,6 +129,12 @@ namespace Assets.Scripts.Mobile.Managers
         private void OnFailedToConnectToPhoton()
         {
             Debug.Log("Disconnected from Network...");
+        }
+
+        public override void OnDisconnected(DisconnectCause i_cause)
+        {
+            Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}.", i_cause);
+            //PhotonNetwork.ReconnectAndRejoin();
         }
 
         #endregion

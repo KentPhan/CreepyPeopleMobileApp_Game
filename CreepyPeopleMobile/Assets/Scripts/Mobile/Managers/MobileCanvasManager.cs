@@ -19,15 +19,20 @@ namespace Assets.Scripts.Mobile.Managers
         [SerializeField] private RectTransform HomeScreen;
         [SerializeField] private RectTransform MappAppScreen;
         [SerializeField] private RectTransform NoPowerScreen;
+        [SerializeField] private RectTransform ConnectionScreen;
 
         // Debug Texts
         [SerializeField] private TextMeshProUGUI ConnectionText;
         [SerializeField] private TextMeshProUGUI TransformText;
 
+        // TextFields
+        [SerializeField] private Text ConnectToText;
+
         // Buttons
         [SerializeField] private Toggle FlashLightToggle;
         [SerializeField] private Button MapButton;
         [SerializeField] private Button HomeButton;
+        [SerializeField] private Button ConnectButton;
 
         // Power Bar
         [SerializeField] private RectTransform PowerInnerBar;
@@ -39,6 +44,7 @@ namespace Assets.Scripts.Mobile.Managers
         // Members
         private PhoneStates m_CurrentPhoneState;
 
+
         private void Awake()
         {
             if (Instance == null)
@@ -48,7 +54,7 @@ namespace Assets.Scripts.Mobile.Managers
                 Destroy(gameObject);
 
             DontDestroyOnLoad(gameObject);
-
+            EnableConnectionScreen();
         }
 
 
@@ -71,6 +77,11 @@ namespace Assets.Scripts.Mobile.Managers
                 if (m_CurrentPhoneState != PhoneStates.NO_POWER)
                     SwitchToHome();
             });
+            ConnectButton.onClick.AddListener(delegate
+            {
+                MobileNetworkManager.Instance.JoinRoom(ConnectToText.text.Trim());
+            });
+
 
             // Get Power Bar Max Width based upon how it is set
             m_PowerBarMaxWidth = PowerInnerBar.rect.width;
@@ -156,6 +167,7 @@ namespace Assets.Scripts.Mobile.Managers
                 NoPowerScreen.gameObject.SetActive(false);
                 MappAppScreen.gameObject.SetActive(true);
                 HomeScreen.gameObject.SetActive(false);
+                ConnectionScreen.gameObject.SetActive(false);
             }
         }
 
@@ -173,6 +185,16 @@ namespace Assets.Scripts.Mobile.Managers
             NoPowerScreen.gameObject.SetActive(true);
             MappAppScreen.gameObject.SetActive(false);
             HomeScreen.gameObject.SetActive(false);
+        }
+
+        public void DisableConnectionScreen()
+        {
+            ConnectionScreen.gameObject.SetActive(false);
+        }
+
+        public void EnableConnectionScreen()
+        {
+            ConnectionScreen.gameObject.SetActive(true);
         }
 
         #endregion

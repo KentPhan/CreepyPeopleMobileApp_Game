@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3414,8 +3414,6 @@ GameObject:
   - component: {fileID: 295721522}
   - component: {fileID: 295721526}
   - component: {fileID: 295721525}
-  - component: {fileID: 295721524}
-  - component: {fileID: 295721523}
   m_Layer: 0
   m_Name: Wall_Left (1)
   m_TagString: Untagged
@@ -3437,32 +3435,6 @@ Transform:
   m_Father: {fileID: 58513243}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!64 &295721523
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295721521}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 597439378}
---- !u!114 &295721524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295721521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 232430130, guid: 4f0627da958b4bb78c260446066f065f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &295721525
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9106,7 +9078,8 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1033470340}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6226708730477213730, guid: c31fdd75d93ec9444948f95f92d2b7f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c31fdd75d93ec9444948f95f92d2b7f6, type: 3}
 --- !u!1001 &673953317
 PrefabInstance:
@@ -9273,9 +9246,29 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6091830426350596880, guid: cdc84df3967d21d4ba46f201e462596c,
+    - target: {fileID: 7976465042330955000, guid: cdc84df3967d21d4ba46f201e462596c,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687337082830919827, guid: cdc84df3967d21d4ba46f201e462596c,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687337082830919827, guid: cdc84df3967d21d4ba46f201e462596c,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190739690464336032, guid: cdc84df3967d21d4ba46f201e462596c,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190739690464336032, guid: cdc84df3967d21d4ba46f201e462596c,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14309,8 +14302,6 @@ GameObject:
   - component: {fileID: 1196289761}
   - component: {fileID: 1196289765}
   - component: {fileID: 1196289764}
-  - component: {fileID: 1196289763}
-  - component: {fileID: 1196289762}
   m_Layer: 0
   m_Name: Wall_Left (2)
   m_TagString: Untagged
@@ -14332,32 +14323,6 @@ Transform:
   m_Father: {fileID: 1598552258}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!64 &1196289762
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196289760}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 117740130}
---- !u!114 &1196289763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196289760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 232430130, guid: 4f0627da958b4bb78c260446066f065f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1196289764
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26039,8 +26004,6 @@ GameObject:
   - component: {fileID: 1661287054}
   - component: {fileID: 1661287058}
   - component: {fileID: 1661287057}
-  - component: {fileID: 1661287056}
-  - component: {fileID: 1661287055}
   m_Layer: 0
   m_Name: Wall_Left (1)
   m_TagString: Untagged
@@ -26062,32 +26025,6 @@ Transform:
   m_Father: {fileID: 1598552258}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!64 &1661287055
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661287053}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 1115729906}
---- !u!114 &1661287056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661287053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 232430130, guid: 4f0627da958b4bb78c260446066f065f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1661287057
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27662,7 +27599,8 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 367219405}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 428878963969529650, guid: b09966f12cba562409c4751724b9f5ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b09966f12cba562409c4751724b9f5ea, type: 3}
 --- !u!43 &1776940049
 Mesh:
@@ -27995,8 +27933,6 @@ GameObject:
   - component: {fileID: 1818351269}
   - component: {fileID: 1818351273}
   - component: {fileID: 1818351272}
-  - component: {fileID: 1818351271}
-  - component: {fileID: 1818351270}
   m_Layer: 0
   m_Name: Wall_Left (2)
   m_TagString: Untagged
@@ -28018,32 +27954,6 @@ Transform:
   m_Father: {fileID: 58513243}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!64 &1818351270
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818351268}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 850297601}
---- !u!114 &1818351271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818351268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 232430130, guid: 4f0627da958b4bb78c260446066f065f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1818351272
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -32256,5 +32166,9 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 715920300}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 973849116880687752, guid: e2e063c31ee0a0a47b4de21908c1d2e2, type: 3}
+    - {fileID: 8189356215149394206, guid: e2e063c31ee0a0a47b4de21908c1d2e2, type: 3}
+    - {fileID: 2424002259312745246, guid: e2e063c31ee0a0a47b4de21908c1d2e2, type: 3}
+    - {fileID: 5209854381272581452, guid: e2e063c31ee0a0a47b4de21908c1d2e2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2e063c31ee0a0a47b4de21908c1d2e2, type: 3}

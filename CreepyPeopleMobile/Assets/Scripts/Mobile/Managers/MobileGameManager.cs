@@ -5,9 +5,10 @@ namespace Assets.Scripts.Mobile.Managers
 {
     public enum GameStates
     {
-        START = 0,
-        PLAY = 1,
-        GAMEOVER = 2
+        NOT_IN_ROOM = 0,
+        START = 1,
+        PLAY = 2,
+        GAMEOVER = 3
     }
 
     public class MobileGameManager : MonoBehaviour
@@ -40,6 +41,7 @@ namespace Assets.Scripts.Mobile.Managers
         void Start()
         {
             m_CurrentPlayer = Instantiate(PlayerRepresentationPrefab, SpawnPosition.transform.position, SpawnPosition.transform.rotation);
+            UpdateGameState(GameStates.NOT_IN_ROOM);
         }
 
         // Update is called once per frame
@@ -76,7 +78,11 @@ namespace Assets.Scripts.Mobile.Managers
             m_CurrentGameState = i_State;
             switch (i_State)
             {
+                case GameStates.NOT_IN_ROOM:
+                    MobileCanvasManager.Instance.EnableConnectionScreen();
+                    break;
                 case GameStates.START:
+                    MobileCanvasManager.Instance.DisableConnectionScreen();
                     MobileCanvasManager.Instance.SwitchToNoPower();
                     break;
                 case GameStates.PLAY:

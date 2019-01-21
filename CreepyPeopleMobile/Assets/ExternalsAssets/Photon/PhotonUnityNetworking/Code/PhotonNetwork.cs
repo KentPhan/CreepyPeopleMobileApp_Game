@@ -23,10 +23,10 @@ namespace Photon.Pun
     using Debug = UnityEngine.Debug;
     using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     using UnityEditor;
     using System.IO;
-    #endif
+#endif
 
 
     public struct InstantiateParameters
@@ -119,7 +119,7 @@ namespace Photon.Pun
         public static string ServerAddress { get { return (NetworkingClient != null) ? NetworkingClient.CurrentServerAddress : "<not connected>"; } }
 
         /// <summary>Currently used Cloud Region (if any). As long as the client is not on a Master Server or Game Server, the region is not yet defined.</summary>
-        public static string CloudRegion { get { return (NetworkingClient != null && IsConnected && Server!=ServerConnection.NameServer) ? NetworkingClient.CloudRegion : null; } }
+        public static string CloudRegion { get { return (NetworkingClient != null && IsConnected && Server != ServerConnection.NameServer) ? NetworkingClient.CloudRegion : null; } }
 
 
         /// <summary>Key to save the "Best Region Summary" in the Player Preferences.</summary>
@@ -901,7 +901,7 @@ namespace Photon.Pun
         /// </remarks>
         public static bool UseAlternativeUdpPorts
         {
-            get { return (NetworkingClient == null) ? false :  NetworkingClient.UseAlternativeUdpPorts; }
+            get { return (NetworkingClient == null) ? false : NetworkingClient.UseAlternativeUdpPorts; }
             set { if (NetworkingClient != null) NetworkingClient.UseAlternativeUdpPorts = value; }
         }
 
@@ -915,7 +915,7 @@ namespace Photon.Pun
         /// </summary>
         static PhotonNetwork()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
 
             if (!EditorApplication.isPlaying && !EditorApplication.isPlayingOrWillChangePlaymode)
             {
@@ -937,7 +937,7 @@ namespace Photon.Pun
                     Component.DestroyImmediate(photonHandler);
                 }
             }
-            #endif
+#endif
 
             if (PhotonServerSettings != null)
             {
@@ -957,13 +957,13 @@ namespace Photon.Pun
             NetworkingClient.OpResponseReceived += OnOperation;
             NetworkingClient.StateChanged += (previousState, state) =>
                                                     {
-														if ( 
-															(previousState == ClientState.Joined && state == ClientState.Disconnected) || 
-															(Server == ServerConnection.GameServer && (state == ClientState.Disconnecting || state == ClientState.DisconnectingFromGameserver))
-															)
-														{
-										                	LeftRoomCleanup();
-														}
+                                                        if (
+                                                            (previousState == ClientState.Joined && state == ClientState.Disconnected) ||
+                                                            (Server == ServerConnection.GameServer && (state == ClientState.Disconnecting || state == ClientState.DisconnectingFromGameserver))
+                                                            )
+                                                        {
+                                                            LeftRoomCleanup();
+                                                        }
                                                     };
 
 
@@ -1036,14 +1036,14 @@ namespace Photon.Pun
 
 
             // apply the AppSettings.Protocol
-            #if UNITY_WEBGL
+#if UNITY_WEBGL
             if (PhotonServerSettings.AppSettings.Protocol == ConnectionProtocol.WebSocket || PhotonServerSettings.AppSettings.Protocol == ConnectionProtocol.WebSocketSecure)
             {
                 NetworkingClient.LoadBalancingPeer.TransportProtocol = PhotonServerSettings.AppSettings.Protocol;
             }
-            #else
+#else
             NetworkingClient.LoadBalancingPeer.TransportProtocol = PhotonServerSettings.AppSettings.Protocol;
-            #endif
+#endif
 
 
             if (PhotonServerSettings.StartInOfflineMode)
@@ -2105,7 +2105,7 @@ namespace Photon.Pun
                     return true;
                 }
 
-                EventData evData = new EventData { Code = eventCode, Parameters = new Dictionary<byte, object> { {ParameterCode.Data, eventContent} } };
+                EventData evData = new EventData { Code = eventCode, Parameters = new Dictionary<byte, object> { { ParameterCode.Data, eventContent } } };
                 NetworkingClient.OnEvent(evData);
                 return true;
             }
@@ -2323,7 +2323,7 @@ namespace Photon.Pun
             return NetworkInstantiate(netParams, false, true);
         }
 
-        
+
         private static readonly HashSet<string> PrefabsWithoutMagicCallback = new HashSet<string>();
 
         private static GameObject NetworkInstantiate(Pun.InstantiateParameters parameters, bool sceneObject = false, bool instantiateEvent = false)
@@ -2338,7 +2338,7 @@ namespace Photon.Pun
             PhotonView[] photonViews;
 
             go = prefabPool.Instantiate(parameters.prefabName, parameters.position, parameters.rotation);
-            
+
 
             if (go == null)
             {
@@ -2381,7 +2381,7 @@ namespace Photon.Pun
                 photonViews[i].ViewID = 0;
 
                 photonViews[i].Prefix = parameters.objLevelPrefix;
-                photonViews[i].InstantiationId = parameters.viewIDs[0];   
+                photonViews[i].InstantiationId = parameters.viewIDs[0];
                 photonViews[i].isRuntimeInstantiated = true;
                 photonViews[i].InstantiationData = parameters.data;
 
@@ -2726,7 +2726,7 @@ namespace Photon.Pun
         {
             HashSet<GameObject> objectsWithComponent = new HashSet<GameObject>();
 
-            Component[] targetComponents = (Component[]) GameObject.FindObjectsOfType(type);
+            Component[] targetComponents = (Component[])GameObject.FindObjectsOfType(type);
             for (int index = 0; index < targetComponents.Length; index++)
             {
                 if (targetComponents[index] != null)
@@ -2798,7 +2798,7 @@ namespace Photon.Pun
 
             PhotonNetwork.IsMessageQueueRunning = false;
             loadingLevelAndPausedNetwork = true;
-            _AsyncLevelLoadingOperation = SceneManager.LoadSceneAsync(levelNumber,LoadSceneMode.Single);
+            _AsyncLevelLoadingOperation = SceneManager.LoadSceneAsync(levelNumber, LoadSceneMode.Single);
         }
 
         /// <summary>Wraps loading a level to pause the network message-queue. Optionally syncs the loaded level in a room.</summary>
@@ -2888,7 +2888,7 @@ namespace Photon.Pun
         }
 
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         /// <summary>
         /// Finds the asset path base on its name or search query: https://docs.unity3d.com/ScriptReference/AssetDatabase.FindAssets.html
@@ -2897,13 +2897,14 @@ namespace Photon.Pun
         /// <param name="asset">Asset.</param>
         public static string FindAssetPath(string asset)
         {
-            string[] guids = AssetDatabase.FindAssets (asset, null);
+            string[] guids = AssetDatabase.FindAssets(asset, null);
             if (guids.Length != 1)
             {
                 return string.Empty;
-            } else
+            }
+            else
             {
-                return AssetDatabase.GUIDToAssetPath (guids [0]);
+                return AssetDatabase.GUIDToAssetPath(guids[0]);
             }
         }
 
@@ -2914,18 +2915,18 @@ namespace Photon.Pun
         /// <returns>The pun asset folder.</returns>
         public static string FindPunAssetFolder()
         {
-            string _thisPath =	FindAssetPath("PhotonClasses");
+            string _thisPath = FindAssetPath("PhotonClasses");
             string _PunFolderPath = string.Empty;
 
             //Debug.Log("FindPunAssetFolder "+_thisPath);
-            string[] subdirectoryEntries = _thisPath.Split ('/');
+            string[] subdirectoryEntries = _thisPath.Split('/');
             foreach (string dir in subdirectoryEntries)
             {
-                if (!string.IsNullOrEmpty (dir))
+                if (!string.IsNullOrEmpty(dir))
                 {
-                    _PunFolderPath += dir +"/";
+                    _PunFolderPath += dir + "/";
 
-                    if (string.Equals (dir, "PhotonUnityNetworking"))
+                    if (string.Equals(dir, "PhotonUnityNetworking"))
                     {
                         //	Debug.Log("_PunFolderPath "+_PunFolderPath);
                         return _PunFolderPath;
@@ -2968,7 +2969,7 @@ namespace Photon.Pun
                 _PunResourcesPath += "Resources/";
 
 
-                string serverSettingsAssetPath = _PunResourcesPath+ PhotonNetwork.ServerSettingsFileName + ".asset";
+                string serverSettingsAssetPath = _PunResourcesPath + PhotonNetwork.ServerSettingsFileName + ".asset";
                 string settingsPath = Path.GetDirectoryName(serverSettingsAssetPath);
                 if (!Directory.Exists(settingsPath))
                 {
@@ -3012,6 +3013,6 @@ namespace Photon.Pun
                 }
             }
         }
-        #endif
+#endif
     }
 }
