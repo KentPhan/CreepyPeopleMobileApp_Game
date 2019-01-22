@@ -152,11 +152,21 @@ namespace Assets.Scripts.Mobile.Managers
         public void OnFlashLightToggle(Toggle i_Toggle)
         {
             MobileNetworkManager.Instance.ToggleFlashLight(i_Toggle.isOn);
+            UpdateFlashLightColor();
+        }
 
-            ColorBlock l_ColorBlock = i_Toggle.colors;
-            l_ColorBlock.normalColor = i_Toggle.isOn ? Color.grey : Color.white;
-            l_ColorBlock.highlightedColor = i_Toggle.isOn ? Color.grey : Color.white;
-            i_Toggle.colors = l_ColorBlock;
+        public void OverrideFlashLightToggleTo(bool i_State)
+        {
+            FlashLightToggle.isOn = i_State;
+            UpdateFlashLightColor();
+        }
+
+        private void UpdateFlashLightColor()
+        {
+            ColorBlock l_ColorBlock = FlashLightToggle.colors;
+            l_ColorBlock.normalColor = FlashLightToggle.isOn ? Color.grey : Color.white;
+            l_ColorBlock.highlightedColor = FlashLightToggle.isOn ? Color.grey : Color.white;
+            FlashLightToggle.colors = l_ColorBlock;
         }
 
         public void SwitchToMap()

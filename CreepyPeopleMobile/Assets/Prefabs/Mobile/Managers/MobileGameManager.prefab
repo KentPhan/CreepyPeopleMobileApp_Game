@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerRepresentationPrefab: {fileID: 3103198466756783, guid: e826020ece5473e42b210db68ab161d8,
     type: 3}
+  SpawnPosition: {fileID: 0}

@@ -155,6 +155,11 @@ namespace Assets.Scripts.Mobile.Managers
         {
             switch (photonEvent.Code)
             {
+                case (byte)PhotonEventCodes.FLASH_LIGHT_TOGGLE:
+                    {
+                        OnReceiveFlashLightState(photonEvent);
+                        break;
+                    }
                 case (byte)PhotonEventCodes.PLAYER_TRANSFORM:
                     {
                         OnReceiveTransform(photonEvent);
@@ -177,6 +182,13 @@ namespace Assets.Scripts.Mobile.Managers
                     }
             }
         }
+        public void OnReceiveFlashLightState(EventData i_photonEvent)
+        {
+            object[] l_data = (object[])i_photonEvent.CustomData;
+            bool l_dataState = (bool)l_data[0];
+            MobileCanvasManager.Instance.OverrideFlashLightToggleTo(l_dataState);
+        }
+
 
         public void OnReceiveTransform(EventData i_photonEvent)
         {

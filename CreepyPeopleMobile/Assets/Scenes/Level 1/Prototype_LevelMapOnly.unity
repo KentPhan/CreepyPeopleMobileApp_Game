@@ -9246,27 +9246,22 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7976465042330955000, guid: cdc84df3967d21d4ba46f201e462596c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2687337082830919827, guid: cdc84df3967d21d4ba46f201e462596c,
+    - target: {fileID: 9190739690464336032, guid: cdc84df3967d21d4ba46f201e462596c,
         type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2687337082830919827, guid: cdc84df3967d21d4ba46f201e462596c,
+    - target: {fileID: 9190739690464336032, guid: cdc84df3967d21d4ba46f201e462596c,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9190739690464336032, guid: cdc84df3967d21d4ba46f201e462596c,
+    - target: {fileID: 2687337082830919827, guid: cdc84df3967d21d4ba46f201e462596c,
         type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9190739690464336032, guid: cdc84df3967d21d4ba46f201e462596c,
+    - target: {fileID: 2687337082830919827, guid: cdc84df3967d21d4ba46f201e462596c,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
