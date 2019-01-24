@@ -117,6 +117,8 @@ namespace Assets.Scripts.Mobile.Managers
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             // Put logic for disconnecting or disconnecting
+            PhotonNetwork.LeaveRoom();
+            MobileGameManager.Instance.UpdateGameState(GameStates.NOT_IN_ROOM);
             base.OnPlayerEnteredRoom(newPlayer);
         }
 
